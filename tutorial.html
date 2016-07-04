@@ -91,7 +91,7 @@
 </div>
 <div class="paragraph">
 <p><a href="http://keycloak.org" target="_blank">JBoss Keycloak</a> provides a standalone OAuth 2.0 and Open ID Connect server.
-It handles user credentials for you application, so you can focus on business requirements.</p>
+It handles user credentials for your application, so you can focus on business requirements.</p>
 </div>
 <div class="paragraph">
 <p><a href="http://dropwizard.io" target="_blank">Dropwizard</a> is a Java framework for developing ops-friendly, high-performance, RESTful web services.</p>
@@ -109,8 +109,8 @@ See <a href="https://github.com/ahus1/keycloak-dropwizard-integration" class="ba
 <div class="sect2">
 <h3 id="_how_to_use">1.2. How to use</h3>
 <div class="paragraph">
-<p>The module <code>keycloak-dropwizard-jaxrs</code> is evolving into a ready-to-use Dropwizard module.
-The first releases are now available (both from jcenter and Maven central):</p>
+<p>The module <code>keycloak-dropwizard-jaxrs</code> is a ready-to-use Dropwizard module.
+The releases are available both from jcenter and Maven central:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -120,10 +120,10 @@ The first releases are now available (both from jcenter and Maven central):</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Version 0.6.x is tested with Keycloak 1.8.x and Dropwizard 0.9</p>
+<p>Version 0.6.x is tested with Keycloak 1.8.x and Dropwizard 0.9.x</p>
 </li>
 <li>
-<p>Version 0.7.x is tested with Keycloak 1.9.x and Dropwizard 0.9</p>
+<p>Version 0.7.x is tested with Keycloak 1.9.x and Dropwizard 0.9.x</p>
 </li>
 </ul>
 </div>
@@ -146,7 +146,7 @@ The first releases are now available (both from jcenter and Maven central):</p>
 <p>These examples need a local JBoss Keycloak instance with Realm <code>test</code> and user <code>demo</code> with password <code>demo</code>.</p>
 </div>
 <div class="paragraph">
-<p>Please download the Keycloak distribution version 1.8.0 from <a href="http://keycloak.org" class="bare">http://keycloak.org</a> and extract it to a subfolder <code>keycloak-server</code> of this directory.
+<p>Please download the Keycloak distribution version 1.9.x from <a href="http://keycloak.org" class="bare">http://keycloak.org</a> and extract it to a subfolder <code>keycloak-server</code> of this directory.
 Then call <code>keycloak-server.bat</code> to import an already configured realm. Using this startup file the configuration will be reset every time you start Keycloak.</p>
 </div>
 </div>
@@ -163,7 +163,7 @@ see  <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/mast
 </li>
 <li>
 <p>Advanced Integration <a href="http://dropwizard.io" target="_blank">Dropwizard</a> style<br>
-see <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/master/keycloak-dropwizard-jaxrs" target="_blank">module keycloak-dropwizard-jaxrs</a>.
+see <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/master/keycloak-dropwizard-jaxrs" target="_blank">module keycloak-dropwizard-jaxrs</a>
 and <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/master/keycloak-dropwizard-jaxrs-example" target="_blank">module keycloak-dropwizard-example</a>.</p>
 </li>
 <li>
@@ -173,7 +173,7 @@ see <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/maste
 </ul>
 </div>
 <div class="paragraph">
-<p>For completeness and an even simple setup a standard Servlet configuration is also included (without and with Keycloak):</p>
+<p>For completeness and as a very simple getting started a standard Servlet configuration is also included (without and with Keycloak):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -379,7 +379,7 @@ limitations under the License.</p>
 <div class="sect2">
 <h3 id="_what_you_can_see_here_3">4.1. What you can see here</h3>
 <div class="paragraph">
-<p>This is a very simple Dropwizard application setup to use Freemarker as templating.</p>
+<p>This is a very simple Dropwizard application setup using Freemarker as templating.</p>
 </div>
 </div>
 <div class="sect2">
