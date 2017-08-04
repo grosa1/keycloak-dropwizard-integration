@@ -544,8 +544,39 @@ environment.jersey().register(<span class="keyword">new</span> AuthValueFactoryP
 <div class="sect2">
 <h3 id="_how_to_use_it">5.3. How to use it</h3>
 <div class="paragraph">
-<p>Anyone who wants to use this will need register this bundle and will need to provide an own implementation derived from <code>KeycloakBundle</code> together with an class encapsulating the user&#8217;s authentication that might be derived from <code>AbstractUser</code>.
-Please see the next chapter how to integrate.</p>
+<p>To use it:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>register the <em>KeycloakBundle</em></p>
+</li>
+<li>
+<p>override <em>getKeycloakConfiguration()</em> to provide the configuration information.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Optionally (if you want to use a different class instead of <em>User</em> to wrap access to Keycloak):</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>override <em>getUserClass()</em> to return the class you are using</p>
+</li>
+<li>
+<p>override <em>createAuthenticator()</em> to provide a factory to create the instances of your user class</p>
+</li>
+<li>
+<p>override <em>createAuthorizer()</em> to implement the role checking used by the <em>@RolesAllowed</em> annotation.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>See the default implementations <em>User</em>, <em>KeycloakAuthenticator</em>, and <em>UserAuthorizer</em> as a guide.</p>
+</div>
+<div class="paragraph">
+<p>Please see the next chapter how to integrate.</p>
 </div>
 </div>
 </div>
@@ -623,6 +654,8 @@ But instead of relying on security constraints it uses Dropwizard&#8217;s <code>
     <span class="directive">protected</span> KeycloakConfiguration getKeycloakConfiguration(LotteryConfiguration configuration) {
         <span class="keyword">return</span> configuration.getKeycloakConfiguration();
     }
+    <span class="comment">/* OPTIONAL: override getUserClass(), createAuthorizer() and createAuthenticator() if you want to use
+    * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
 });</code></pre>
 </div>
 </div>
@@ -887,6 +920,8 @@ Be aware that all calls to REST ressources now require a Bearer Token. There are
     <span class="directive">protected</span> KeycloakConfiguration getKeycloakConfiguration(LotteryConfiguration configuration) {
         <span class="keyword">return</span> configuration.getKeycloakConfiguration();
     }
+    <span class="comment">/* OPTIONAL: override getUserClass(), createAuthorizer() and createAuthenticator() if you want to use
+    * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
 });</code></pre>
 </div>
 </div>
