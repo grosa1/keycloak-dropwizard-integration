@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.6.1">
+<meta name="generator" content="Asciidoctor 1.5.6.2">
 <title>Integration of Keycloak and Dropwizard</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="css/asciidoctor.css">
@@ -130,7 +130,7 @@ The releases are available both from jcenter and Maven central:</p>
 <p>Version 0.9.x is tested with Keycloak 2.x.x/3.x.x and Dropwizard 1.0.x</p>
 </li>
 <li>
-<p>Version 1.0.x is tested with Keycloak 3.x.x and Dropwizard 1.1.x/1.2.x</p>
+<p>Version 1.0.x is tested with Keycloak 3.x.x and Dropwizard 1.1.x/1.2.x/1.3.x</p>
 </li>
 </ul>
 </div>
@@ -198,7 +198,7 @@ see  <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/mast
 <div class="sect2">
 <h3 id="_license">1.5. License</h3>
 <div class="paragraph">
-<p>Copyright 2015-2017 Alexander Schwartz</p>
+<p>Copyright 2015-2018 Alexander Schwartz</p>
 </div>
 <div class="paragraph">
 <p>Licensed under the Apache License, Version 2.0 (the "License");
@@ -328,7 +328,8 @@ commented out to avoid network resolution of DTD
 <div class="listingblock">
 <div class="title">index.ftl</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="freemarker"></code></pre>
+<pre class="CodeRay highlight"><code data-lang="freemarker">Hello, ${idToken.name}!
+(&lt;a href=&quot;logout&quot;&gt;logout&lt;/a&gt;)</code></pre>
 </div>
 </div>
 </li>
@@ -719,7 +720,7 @@ But instead of relying on security constraints it uses Dropwizard&#8217;s <code>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>mvn test -pl keycloak-dropwizard-jaxrs-example -am -Peycloak-dropwizard-jaxrs-example</pre>
+<pre>mvn test -pl keycloak-dropwizard-jaxrs-example -am -Pkeycloak-dropwizard-jaxrs-example</pre>
 </div>
 </div>
 <div class="paragraph">
