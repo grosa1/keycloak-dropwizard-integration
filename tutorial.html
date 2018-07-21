@@ -318,7 +318,7 @@ commented out to avoid network resolution of DTD
 <div class="listingblock">
 <div class="title">DrawServlet.java</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">request.setAttribute(<span class="string"><span class="delimiter">&quot;</span><span class="content">idToken</span><span class="delimiter">&quot;</span></span>, ((KeycloakPrincipal)request.getUserPrincipal())
+<pre class="CodeRay highlight"><code data-lang="java">request.setAttribute(<span class="string"><span class="delimiter">&quot;</span><span class="content">idToken</span><span class="delimiter">&quot;</span></span>, ((KeycloakPrincipal) request.getUserPrincipal())
         .getKeycloakSecurityContext().getIdToken());</code></pre>
 </div>
 </div>
@@ -654,7 +654,7 @@ But instead of relying on security constraints it uses Dropwizard&#8217;s <code>
         <span class="keyword">return</span> configuration.getKeycloakConfiguration();
     }
     <span class="comment">/* OPTIONAL: override getUserClass(), createAuthorizer() and createAuthenticator() if you want to use
-    * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
+     * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
 });</code></pre>
 </div>
 </div>
@@ -809,7 +809,8 @@ Be aware that all calls to REST ressources now require a Bearer Token. There are
 <div class="listingblock">
 <div class="title">LotteryApplication.java</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">KeycloakDeployment keycloakDeployment = KeycloakDeploymentBuilder.build(configuration.getKeycloakConfiguration());
+<pre class="CodeRay highlight"><code data-lang="java">KeycloakDeployment keycloakDeployment =
+        KeycloakDeploymentBuilder.build(configuration.getKeycloakConfiguration());
 JaxrsBearerTokenFilterImpl filter = <span class="keyword">new</span> DropwizardBearerTokenFilterImpl(keycloakDeployment);
 environment.jersey().register(filter);</code></pre>
 </div>
@@ -882,9 +883,9 @@ OAuth redirect initiated by the frontend.</p>
     <span class="directive">private</span> KeycloakConfiguration keycloakConfiguration = <span class="keyword">new</span> KeycloakConfiguration();
 
     <span class="directive">public</span> KeycloakConfiguration getKeycloakConfiguration() {
-        <span class="keyword">if</span>(keycloakConfiguration.isBearerOnly() == <span class="predefined-constant">false</span>) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">RuntimeException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">For this application the backend must be configured 'bearer only'. </span><span class="delimiter">&quot;</span></span> +
-                    <span class="string"><span class="delimiter">&quot;</span><span class="content">This avoids confusion of the keycloak dropwizard plugin when detecting OAuth redirects</span><span class="delimiter">&quot;</span></span>);
+        <span class="keyword">if</span> (!keycloakConfiguration.isBearerOnly()) {
+            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="exception">RuntimeException</span>(<span class="string"><span class="delimiter">&quot;</span><span class="content">For this application the backend must be configured 'bearer only'. </span><span class="delimiter">&quot;</span></span>
+                    + <span class="string"><span class="delimiter">&quot;</span><span class="content">This avoids confusion of the keycloak dropwizard plugin when detecting OAuth redirects</span><span class="delimiter">&quot;</span></span>);
         }
         <span class="keyword">return</span> keycloakConfiguration;
     }
@@ -919,7 +920,7 @@ Be aware that all calls to REST ressources now require a Bearer Token. There are
         <span class="keyword">return</span> configuration.getKeycloakConfiguration();
     }
     <span class="comment">/* OPTIONAL: override getUserClass(), createAuthorizer() and createAuthenticator() if you want to use
-    * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
+     * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
 });</code></pre>
 </div>
 </div>
