@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="generator" content="Asciidoctor 2.0.12">
 <title>Integration of Keycloak and Dropwizard</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="css/asciidoctor.css">
@@ -100,7 +100,7 @@ It handles user credentials for your application, so you can focus on business r
 <p><strong>TL;DR:</strong> The module
 <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/master/keycloak-dropwizard-jaxrs-example">keycloak-dropwizard-jaxrs-example</a>
 shows how to use Dropwizard&#8217;s <code>@Auth</code> annotation with Keycloak using a full OAuth flow.
-If you have a i.e. a JavaScript-Client and want to send only JWT Tokens, go directly to <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/master/keycloak-dropwizard-bearermodule">keycloak-dropwizard-bearermodule</a></p>
+If you have i.e. a JavaScript-Client and want to send only JWT Tokens, go directly to <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/master/keycloak-dropwizard-bearermodule">keycloak-dropwizard-bearermodule</a></p>
 </div>
 <div class="paragraph">
 <p>At the time I write this there is no open source integration of the two, so I set up this project.
@@ -111,12 +111,14 @@ See <a href="https://github.com/ahus1/keycloak-dropwizard-integration" class="ba
 <h3 id="_how_to_use">1.2. How to use</h3>
 <div class="paragraph">
 <p>The module <code>keycloak-dropwizard-jaxrs</code> is a ready-to-use Dropwizard module.
-The releases are available both from jcenter and Maven central:</p>
+The releases are available from Maven central.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<a class="image" href="https://bintray.com/ahus1/maven/keycloak-dropwizard/_latestVersion"><img src="https://api.bintray.com/packages/ahus1/maven/keycloak-dropwizard/images/download.svg" alt="download"></a>
+<div class="paragraph">
+<p>The releases depend on a version of Dropwizard and Keycloak that was current at release time.
+To use a more recent release, please add them as an explicit dependency to your project, as this project will not release new versions on every minor or patch release of its dependencies.</p>
 </div>
+<div class="paragraph">
+<p><span class="image"><a class="image" href="https://mvnrepository.com/artifact/de.ahus1.keycloak.dropwizard/keycloak-dropwizard"><img src="https://img.shields.io/maven-central/v/de.ahus1.keycloak.dropwizard/keycloak-dropwizard-parent" alt="Maven Central"></a></span> <span class="image"><a class="image" href="https://travis-ci.org/github/ahus1/keycloak-dropwizard-integration/builds"><img src="https://travis-ci.org/ahus1/keycloak-dropwizard-integration.svg?branch=master" alt="Build Status"></a></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -133,20 +135,52 @@ The releases are available both from jcenter and Maven central:</p>
 <p>Version 1.0.x is tested with Keycloak 3.x.x and Dropwizard 1.1.x/1.2.x/1.3.x</p>
 </li>
 <li>
-<p>Version 1.1.x is tested with Keycloak 4.x.x and Dropwizard 1.3.x</p>
+<p>Version 1.1.x is tested with Keycloak 4.x-11.x and Dropwizard 1.3.x/2.0.x</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Starting with Dropwizard 2.0 and the included version of Jersey, a login performed during a POST for a form will not recover the contents of the POST.
+This is wired into Keycloak&#8217;s <em>JettyAdapterSessionStore</em> (that restores the content type and the parameters to the request), but Jersey&#8217;s <em>InboundMessageContext</em> that wants to read the information the request&#8217;s header and the body.
+See the <em>shouldLoginFromPost()</em> test case for an example.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="title">pom.xml</div>
 <div class="content">
-<pre>&lt;dependencies&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;de.ahus1.keycloak.dropwizard&lt;/groupId&gt;
-    &lt;artifactId&gt;keycloak-dropwizard&lt;/artifactId&gt;
-    &lt;version&gt;x.x.x&lt;/version&gt;
-  &lt;/dependency&gt;
-&lt;/dependencies&gt;</pre>
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;dependencies&gt;</span>
+  <span class="tag">&lt;dependency&gt;</span>
+    <span class="tag">&lt;groupId&gt;</span>de.ahus1.keycloak.dropwizard<span class="tag">&lt;/groupId&gt;</span>
+    <span class="tag">&lt;artifactId&gt;</span>keycloak-dropwizard<span class="tag">&lt;/artifactId&gt;</span>
+    <span class="tag">&lt;version&gt;</span>x.x.x<span class="tag">&lt;/version&gt;</span>
+  <span class="tag">&lt;/dependency&gt;</span>
+<span class="tag">&lt;/dependencies&gt;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The most recent development version (based on the <em>master</em> branch on GitHub) is available from the Sonatype OSS Snapshot Repository. To use it, include the following repository in your <em>pom.xml</em>.</p>
+</div>
+<div class="listingblock">
+<div class="title">pom.xml</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;repositories&gt;</span>
+    <span class="tag">&lt;repository&gt;</span>
+        <span class="tag">&lt;id&gt;</span>snapshots-repo<span class="tag">&lt;/id&gt;</span>
+        <span class="tag">&lt;url&gt;</span>https://oss.sonatype.org/content/repositories/snapshots<span class="tag">&lt;/url&gt;</span>
+        <span class="tag">&lt;releases&gt;</span><span class="tag">&lt;enabled&gt;</span>false<span class="tag">&lt;/enabled&gt;</span><span class="tag">&lt;/releases&gt;</span>
+        <span class="tag">&lt;snapshots&gt;</span><span class="tag">&lt;enabled&gt;</span>true<span class="tag">&lt;/enabled&gt;</span><span class="tag">&lt;/snapshots&gt;</span>
+    <span class="tag">&lt;/repository&gt;</span>
+<span class="tag">&lt;/repositories&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -201,10 +235,10 @@ see  <a href="https://github.com/ahus1/keycloak-dropwizard-integration/tree/mast
 <div class="sect2">
 <h3 id="_license">1.5. License</h3>
 <div class="paragraph">
-<p>Copyright 2015-2018 Alexander Schwartz</p>
+<p>Copyright 2015-2020 Alexander Schwartz</p>
 </div>
 <div class="paragraph">
-<p>Licensed under the Apache License, Version 2.0 (the "License");
+<p>Licensed under the Apache License, Version 2.0 (the &#8220;License&#8221;);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
 </div>
@@ -213,7 +247,7 @@ You may obtain a copy of the License at</p>
 </div>
 <div class="paragraph">
 <p>Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an &#8220;AS IS&#8221; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</p>
@@ -657,7 +691,7 @@ But instead of relying on security constraints it uses Dropwizard&#8217;s <code>
         <span class="keyword">return</span> configuration.getKeycloakConfiguration();
     }
     <span class="comment">/* OPTIONAL: override getUserClass(), createAuthorizer() and createAuthenticator() if you want to use
-     * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
+     * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @Auth */</span>
 });</code></pre>
 </div>
 </div>
@@ -665,7 +699,7 @@ But instead of relying on security constraints it uses Dropwizard&#8217;s <code>
 </ol>
 </div>
 <div class="paragraph">
-<p>Once this is set up, Dropwizard&#8217;s <code>@Auth</code> annotation can be used as usual in ressources:</p>
+<p>Once this is set up, Dropwizard&#8217;s <code>@Auth</code> annotation can be used as usual in resources:</p>
 </div>
 <div class="listingblock">
 <div class="title">DrawRessource</div>
@@ -804,7 +838,7 @@ The client authenticates all requests using a Bearer Token.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Be aware that all calls to REST ressources now require a Bearer Token. There are no unauthenticated requests any more (except to static ressources)
+Be aware that all calls to REST resources now require a Bearer Token. There are no unauthenticated requests any more (except to static resources)
 </td>
 </tr>
 </table>
@@ -822,7 +856,7 @@ environment.jersey().register(filter);</code></pre>
 </ol>
 </div>
 <div class="paragraph">
-<p>A very short and simple JavaScript client is located in <code>src/main/ressources/assets/ajax</code>.</p>
+<p>A very short and simple JavaScript client is located in <code>src/main/resources/assets/ajax</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -909,7 +943,7 @@ OAuth redirect initiated by the frontend.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Be aware that all calls to REST ressources now require a Bearer Token. There are no unauthenticated requests any more (except to static ressources)
+Be aware that all calls to REST resources now require a Bearer Token. There are no unauthenticated requests any more (except to static resources)
 </td>
 </tr>
 </table>
@@ -923,7 +957,7 @@ Be aware that all calls to REST ressources now require a Bearer Token. There are
         <span class="keyword">return</span> configuration.getKeycloakConfiguration();
     }
     <span class="comment">/* OPTIONAL: override getUserClass(), createAuthorizer() and createAuthenticator() if you want to use
-     * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @User*/</span>
+     * a class other than de.ahus1.keycloak.dropwizard.User to be injected by @Auth */</span>
 });</code></pre>
 </div>
 </div>
@@ -931,7 +965,7 @@ Be aware that all calls to REST ressources now require a Bearer Token. There are
 </ol>
 </div>
 <div class="paragraph">
-<p>A very short and simple JavaScript client is located in <code>src/main/ressources/assets/ajax</code>.</p>
+<p>A very short and simple JavaScript client is located in <code>src/main/resources/assets/ajax</code>.</p>
 </div>
 </div>
 <div class="sect2">
