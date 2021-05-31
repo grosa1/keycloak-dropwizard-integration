@@ -854,7 +854,8 @@ The client authenticates all requests using a Bearer Token.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Methods that have neither and want to check if the user has sent a valid token can add a parameter <em>@Context SecurityContext context</em> and check the logged-in user via <em>context.getUserPrincipal()</em>.</p>
+<p>Methods and classes that have neither will proceed when the user hasn&#8217;t sent a Bearer Token or is not authenticated, or if the user has sent an (optional) valid Bearer Token.
+To check if the user has sent an (optional) valid token, add a parameter <em>@Context SecurityContext context</em> and check the logged-in user via <em>context.getUserPrincipal()</em>.</p>
 </div>
 </td>
 </tr>
@@ -970,7 +971,8 @@ The Keycloak Dropwizard module with not interfere with any OAuth redirect initia
 </ul>
 </div>
 <div class="paragraph">
-<p>Methods that have neither and want to check if the user has sent a valid token can add a parameter <em>@Context SecurityContext context</em> and check the logged-in user via <em>context.getUserPrincipal()</em>.</p>
+<p>Methods and classes that have neither will proceed when the user hasn&#8217;t sent a Bearer Token or is not authenticated, or if the user has sent an (optional) valid Bearer Token.
+To check if the user has sent an (optional) valid token, add a parameter <em>@Context SecurityContext context</em> and check the logged-in user via <em>context.getUserPrincipal()</em>.</p>
 </div>
 </td>
 </tr>
