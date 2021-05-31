@@ -137,7 +137,7 @@ To use a more recent release, please add them as an explicit dependency to your 
 <p>Version 1.0.x is tested with Keycloak 3.x.x and Dropwizard 1.1.x/1.2.x/1.3.x</p>
 </li>
 <li>
-<p>Version 1.1.x is tested with Keycloak 4.x-12.x and Dropwizard 1.3.x/2.0.x</p>
+<p>Version 1.1.x is tested with Keycloak 4.x-13.x and Dropwizard 1.3.x/2.0.x</p>
 </li>
 </ul>
 </div>
@@ -840,7 +840,22 @@ The client authenticates all requests using a Bearer Token.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Be aware that all calls to REST resources now require a Bearer Token. There are no unauthenticated requests any more (except to static resources)
+<div class="paragraph">
+<p>Be aware that all calls to REST resources now require a Bearer Token only if</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the method or class is annotated with <em>@RolesAllowed</em> <strong>OR</strong></p>
+</li>
+<li>
+<p>has a method parameter annotated with <em>@Auth</em>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Methods that have neither and want to check if the user has sent a valid token can add a parameter <em>@Context SecurityContext context</em> and check the logged-in user via <em>context.getUserPrincipal()</em>.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -901,9 +916,9 @@ The client authenticates all requests using a Bearer Token.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add Keycloak <code>config-bearer.yml</code> with bearer only authentication.This way the Keycloak will not
-initiate the OAuth redirecting flow.And the Keycloak Dropwizard module with not interfere with any
-OAuth redirect initiated by the frontend.</p>
+<p>Add Keycloak <code>config-bearer.yml</code> with bearer only authentication.
+This way the Keycloak will not initiate the OAuth redirecting flow.
+The Keycloak Dropwizard module with not interfere with any OAuth redirect initiated by the frontend.</p>
 <div class="listingblock">
 <div class="title">config-bearer.yml</div>
 <div class="content">
@@ -941,7 +956,22 @@ OAuth redirect initiated by the frontend.</p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Be aware that all calls to REST resources now require a Bearer Token. There are no unauthenticated requests any more (except to static resources)
+<div class="paragraph">
+<p>Be aware that all calls to REST resources now require a Bearer Token only if</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the method or class is annotated with <em>@RolesAllowed</em> <strong>OR</strong></p>
+</li>
+<li>
+<p>has a method parameter annotated with <em>@Auth</em>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Methods that have neither and want to check if the user has sent a valid token can add a parameter <em>@Context SecurityContext context</em> and check the logged-in user via <em>context.getUserPrincipal()</em>.</p>
+</div>
 </td>
 </tr>
 </table>
